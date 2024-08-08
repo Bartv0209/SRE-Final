@@ -1,7 +1,7 @@
 IDE
 Als IDE heb ik VS Code gebruikt. De reden hiervoor is dat ik de extensie-integratie erg fijn vind werken en al bekend ben met de IDE door school. Ook heb ik toegang tot Git Bash in VS Code, wat in mijn mening het beste werkt.
 
-VM-omgeving
+VM-omgeving  
 Als VM-omgeving heb ik Docker gebruikt.
 
 Efficiëntie: Docker is erg efficiënt omdat het weinig systeembronnen vraagt en over het algemeen snel werkt.
