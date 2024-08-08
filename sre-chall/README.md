@@ -1,54 +1,40 @@
-# Warpnet SRE Challenge
+Documentatie SRE-Challenge
 
-Welcome to the Site Reliability Engineering (SRE) challenge, where your SRE skills will be put to the test. You'll deploy an application in both a traditional and Kubernetes environment, showcasing your ability to orchestrate complex systems. From defining Kubernetes manifests to fixing bugs and ensuring good observability, this challenge mirrors real-world scenarios encountered by our SREs. Whether you're a seasoned professional or a newcomer eager to explore complex cloud environments, this challenge offers platform to demonstrate your expertise.
+IDE: 
+Als IDE heb ik VS Code gebruikt. De reden hiervoor is dat ik de extensie integratie erg fijn vindt werken en al bekend ben met de IDE door school.
+Ook heb ik toegang tot Git Bash in VS code, wat in mijn mening het best werkt. 
+VM omgeving:
+Als VM omgeving heb ik Docker gebruikt. 
+Efficiënt: 
+Docker is erg efficiënt omdat het weinig systeem resources vraagt en het over het algemeen snel werkt.
+Voorkennis:
+Ik heb voor verschillende projecten Docker gebruikt, hierdoor had ik al wat voorkennis over hoe Docker werkt.
+Extensies:
+In Docker bestaan er extensies die een image kunnen scannen op zwakke plekken, voor een eerder project heb ik Snyk gebruikt, in dit geval heb ik dat ook gedaan.
 
-## Instructions
+minikube
+als minikube omgeving heb ik ook Docker gebruikt.
+Tijdens het lezen van de minikube documentatie las ik dat Docker ook gebruikt kan worden voor het draaien van een minikube container, aangezien ik het VM gedeelte van de opdracht ook heb gedaan in Docker leek het me een goed plan om dit deel ook in Docker te maken. 
+Voor dit onderdeel is het mij niet gelukt om op mijn Windows pc minikube aan de praat te krijgen, op mijn Macbook is het echter wel gelukt, de reden hiervoor weet ik niet helaas.
+ 
 
-Your goal is to deploy the included Python application directly in a local Kubernetes cluster. The application may contain some bugs and vulnerabilities.
+gebruikte resources: 
+ik heb de documentatie gebruikt die op de minikube site staat, ook heb ik een YouTube video gebruikt waarin de maker stap voor stap uitlegt hoe hij zijn eigen applicatie laat draaien via minikube. 
+Link naar video:
+https://www.youtube.com/watch?v=qFhzu7LolUU&t=531s
 
-You can use to following command to start the application:
-```bash
-cd app
-pip install -r requirements.txt
-flask --app application run
-```
 
-Test the application by opening [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
+vulnerabilities: 
 
-You're allowed to modify the included application as you see fit.
+Nadat ik de complete SRE omgeving werkend heb gekregen kon ik met Snyk een scan uitvoeren, hieruit kwam 1 kritische fout. 
+ 
+Deze fout geeft aan dat in de library  ‘zlib’ een integer overflow zit. Wanneer de maximale waarde binnen het systeem wordt bereikt en een +1 wordt gegeven kan het zijn dat de integer naar de laagst mogelijke waarde gaat.
+Voorbeeld: bij een 8 bit systeem kan de integer gaat van -128 tot +127, wanneer er een 1 wordt opgeteld bij die 127 zal het systeem weer terugspringen naar -128, vandaar wordt het dus ook een wraparound genoemd.
 
-## Objectives
+Ik heb verder in de python code gezocht naar zwakke plekke / slecht geschreven code. 
+Ik heb niets aangepast, maar heb wel commentaar geplaatst op de plekken waar de code verbeterd kon worden. 
+Zo stond de secret key gewoon in plaintext in de code. 
+Werden alle gebruikers opgehaald bij een poging tot inloggen
+En werden alle wachtwoorden in plaintext vergeleken met elkaar. 
 
-In this challenge, you'll navigate through a series of objectives designed to assess your proficiency as an SRE. Each objective is crafted to highlight specific aspects of your skills.
 
-- Functionality
-- Simplicity
-- Readability
-- Extensibility
-- Maintainability
-- Observability
-- Security
-
-As you embark on the SRE challenge, we want to emphasize that the objective is not to stress about achieving perfection on every front. Our primary goal is to gain insights into you current skillset and problem-solving approach within the realm of Site Reliability Engineering. Recognize that the challenge may be multifaceted, and it's perfectly acceptable to prioritize certain objectives over others. This challenge is an opportunity for you to demonstrate your existing skills and learning, providing valuable insights into your capabilities as an SRE professional.
-
-## Challenge
-
-A lot of enterprise organizations make the transition from traditional virtual machines to deployments in a Kubernetes based infrastructure.
-Automation, security, architecture, quality of code are main subjects during this transition. This challenge is all about simulating that. There are a three main assignments that you need to do during this challenge:
-
-- Deploy the app on a traditional VM. 
-- Look into the application code and make adjustments that you think are necessary.
-- Deploy the app on a Kubernetes environment.
-
-You are free to choose which tools and methods you use during this challenge. Keep in mind that you should show the listed aspects under [Objectives](#objectives) in your solution.
-
-## Tips and tricks
-
-Below you'll find a few quick tips to get your environment up and running. If you are more comfortable using other kind of tools, feel free to use them!
-
-- [Vagrant](https://www.vagrantup.com/): a tool that allows you to quickly setup a dev environment based on virtual machines.
-- [MiniKube](https://minikube.sigs.k8s.io/docs/): in general Kubernetes requires a lot of resources, MiniKube helps you setting up a local cluster on your workstation.
-
-## Get Involved
-
-[Explore open jobs at Warpnet](https://warpnet.nl/jobs/) or take a look at our [featured projects](https://github.com/warpnet). Visit [warpnet.nl](https://warpnet.nl/) to learn more!
